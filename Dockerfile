@@ -9,9 +9,10 @@ RUN apk add --no-cache \
     git \
     nano \
     openssl \
-    # Installs the Docker CLI and the v2 Compose plugin
+    # Installs the Docker CLI
     docker-cli \
-    docker-compose-plugin
+    # Installs the v2 Compose plugin for Alpine
+    docker-cli-compose
 
 # Set the working directory for all subsequent commands.
 WORKDIR /opt/mailcow-dockerized
