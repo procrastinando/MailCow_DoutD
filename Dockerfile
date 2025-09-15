@@ -31,6 +31,15 @@ WORKDIR /opt/mailcow-dockerized
 # that the manager container will use to deploy the actual mail stack.
 RUN git clone https://github.com/mailcow/mailcow-dockerized.git .
 
+# Create the directory for SSL certificates as a prerequisite.
+RUN mkdir -p /opt/mailcow-dockerized/data/assets/ssl/
+
+# Copy your custom renewal script from the build context (your local directory)
+COPY mailcow_cert_renewal.sh .
+
+# Make the renewal script executable.
+RUN chmod +x /opt/mailcow-dockerized/mailcow_cert_renewal.sh
+
 # Set a default command (to be overridden by the docker-compose.yml 'command'
 # to ensure the container stays running).
 CMD ["/bin/bash"]
